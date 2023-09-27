@@ -30,10 +30,10 @@ function App() {
 const Layout = ({ children }: { children: JSX.Element }) => {
   return (
     <div className='w-full max-w-[1520px] mx-auto h-full min-h-screen bg-white flex flex-col md:flex-row items-start'>
-      <div className="hidden md:block relative md:sticky shrink-0 bg-secondary top-0 w-full min-w-[280px] sm:w-[20%] lg:w-[30%] min-h-screen">
+      {/* <div className="hidden md:block relative md:sticky shrink-0 bg-secondary top-0 w-full min-w-[280px] sm:w-[20%] lg:w-[30%] min-h-screen">
         <img src={BG} className="absolute top-0 left-0 w-full object-contain" />
         <Sidebar />
-      </div>
+      </div> */}
       <div className='w-full md:hidden'>
         <Header />
       </div>

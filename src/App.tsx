@@ -2,37 +2,12 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { BG, LOADER_PRIMARY } from './assets';
 import Header from './components/Header';
-import ReCaptcha from './components/ReCatpcha';
 import Sidebar from './components/Sidebar';
 import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [isRecaptchSolved, setIsRecaptchaSolved] = useState(false);
-
-  const onCaptchSolved = () => {
-    setIsRecaptchaSolved(true)
-  }
-
-  if (loading) {
-    return (
-      <div className="w-full min-h-screen bg-white flex items-center justify-center">
-        <img src={LOADER_PRIMARY} className="h-16" />
-      </div>
-    )
-  }
-
-  if (!isRecaptchSolved) {
-    return (
-      <div className="w-full min-h-screen bg-white flex items-center justify-center">
-        <ReCaptcha
-          handleCallback={onCaptchSolved}
-        />
-      </div>
-    )
-  }
-
   return (
     <Router>
       <Routes>

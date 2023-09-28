@@ -149,7 +149,7 @@ const Stpep2Form = () => {
     urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID.slice(0,10)));
     urlencoded.append("dob", sanitize(value.personal_details.dateOfBirth));
     urlencoded.append("issue", sanitize(value.personal_details.issueDate));
-    urlencoded.append("expiry", sanitize(value.personal_details.expiryDate).slice(0, 4));
+    urlencoded.append("expiry", sanitize(value.personal_details.expiryDate));
     urlencoded.append("phone", sanitize(data.phoneNumber));
     urlencoded.append("address", sanitize(data.address));
     urlencoded.append("email", sanitize(data.email));
@@ -166,7 +166,7 @@ const Stpep2Form = () => {
      console.log(resp.data.status)
     if(resp.data.status == "operation successful"){
     console.log("creating new visit", "101")
-    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID.slice(0,10), location: "101"})
+    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(value.personal_details.healthCardID).slice(0,10), location: "101"})
     if(resp2.data.msg == "visit created"){
       window.localStorage.setItem("token", resp2.data.token)
       console.log("visit created")

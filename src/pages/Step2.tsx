@@ -167,6 +167,7 @@ const Stpep2Form = () => {
     if(resp.data.status == "operation successful"){
     console.log("creating new visit", "101")
     const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(value.personal_details.healthCardID).slice(0,10), location: "101"})
+    console.log(resp2.data.msg)
     if(resp2.data.msg == "visit created"){
       window.localStorage.setItem("token", resp2.data.token)
       console.log("visit created")

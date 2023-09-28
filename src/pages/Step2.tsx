@@ -146,7 +146,7 @@ const Stpep2Form = () => {
     urlencoded.append("firstname", sanitize(value.personal_details.firstName));
     urlencoded.append("middlename", sanitize(value.personal_details.middleName));
     urlencoded.append("lastname", sanitize(value.personal_details.lastName));
-    urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID));
+    urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID.slice(0,10)));
     urlencoded.append("dob", sanitize(value.personal_details.dateOfBirth));
     urlencoded.append("issue", sanitize(value.personal_details.issueDate));
     urlencoded.append("expiry", sanitize(value.personal_details.expiryDate).slice(0, 4));
@@ -192,10 +192,20 @@ const Stpep2Form = () => {
           address_details: data,
           id: docRef.id,
           created_at: serverTimestamp()
-        }).then(() => {
+        }).then(async () => {
+          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID.slice(0,10), location: "101"})
+          if(resp2.data.msg == "visit created"){
+            window.localStorage.setItem("token", resp2.data.token)
+            console.log("visit created")
+            navigate("/registered")
+          }else{
+            console.log(...resp2.data)
+            console.log("error occured.")
+          }
         }).catch(err => {
           console.log(err)
         })
+        
         setLoading(false);
         setError(false);
         setSubmitted(true)

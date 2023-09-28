@@ -1,5 +1,5 @@
 /* global google */
-
+import axios from "axios"
 import { useLoadScript } from '@react-google-maps/api';
 import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes, uploadString } from 'firebase/storage';
@@ -115,8 +115,11 @@ const Stpep2Form = () => {
 
     let downloadUrl = "";
     if (value.personal_details.healthCardImage) {
+      
       // downloadUrl = await uploadImageToStorage(value.personal_details.healthCardImage);
     }
+
+    
     // const docRef = doc(collection(db, dbCollections.formData));
     // await setDoc(doc(db, dbCollections.formData, docRef.id), {
     //   personal_details: {
@@ -134,6 +137,7 @@ const Stpep2Form = () => {
     //   // resetValues();
     //   console.log(err)
     // })
+    
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -157,7 +161,23 @@ const Stpep2Form = () => {
       redirect: 'follow'
     };
     // TODO: update the records and create a new visit here.
-
+    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value,
+      source: "webform" 
+     });
+    if(resp.data.status == "operation successful"){
+    console.log("creating new visit", "101")
+    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID, location: "101"})
+    if(resp2.data.msg == "visit created"){
+      window.localStorage.setItem("token", resp2.data.token)
+      console.log("visit created")
+      navigate("/registered")
+    }else{
+      console.log(resp2)
+      console.log("error occured.")
+    }
+    }else{
+    console.log("something went wrong...")
+    }
     //@ts-ignore
     fetch(process.env.REACT_APP_REGISTER_PATIENT!, requestOptions)
       .then(res => res.json())

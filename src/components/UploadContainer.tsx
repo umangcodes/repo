@@ -1,5 +1,5 @@
 import React from "react";
-// import Webcam from "react-webcam";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDropzone } from "react-dropzone";
@@ -7,7 +7,6 @@ import { toast, Toaster } from "react-hot-toast";
 import useScript from "react-use-scripts";
 import { CAMERA, CLOSE_RED, LOADER_PRIMARY, MENU, PLUS } from "../assets";
 import { storage } from "../firebase";
-// import modelUrl from "./card_detection_model.tflite";
 import Portal from "./Portal";
 import ScanImage from "./ScanImage";
 
@@ -219,22 +218,6 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
                   image: imgSrc,
                 });
                 setResults(res.data);
-                // TODO: check for the healthcard if exist in the database here!!
-                try{
-                    console.log("creating new visit")
-                    const resp2 = await axios.post(process.env.REACT_APP_CREATE_NEW_VISIT, {healthcard: res.data.heathcard, location: "101"})
-                    if(resp2.data.msg == "visit created"){
-                      window.localStorage.setItem("token", resp2.data.token)
-                      console.log("visit created")
-                      // router.push("/registered")
-                      // TODO: Route to registered page
-                    }else{
-                      console.log("error occured.")
-                    }
-                }catch(err){
-                  console.log("error: " + err)
-                }
-                
 
                 onSuccess({ ...res.data, healthCardImage: imgSrc })
                 setLoading(false);
@@ -516,6 +499,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
 
 const UploadContainer = ({ step1Data, setStep1Data }: any) => {
   const [model, setModel] = React.useState(null);
+  const navigate = useNavigate()
   const { ready: tfjsReady } = useScript({
     src: "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js",
   });

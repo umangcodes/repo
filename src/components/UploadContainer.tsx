@@ -335,7 +335,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
   }
 
   const onImageDetect = async (imgSrc: string) => {
-    console.log("deteted");
+    console.log("detected");
     setImgSrc(imgSrc)
     setLoading(true);
     setShowCamera(false)

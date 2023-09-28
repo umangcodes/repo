@@ -175,7 +175,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           type="text"
           label="First Name"
           register={register}
-          name="firstName"
+          name="firstname"
           errors={errors}
           placeholder="First Name"
           required={"This field is required"}
@@ -184,7 +184,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           type="text"
           label="Middle Name"
           register={register}
-          name="middleName"
+          name="middlename"
           errors={errors}
           placeholder="Middle Name"
         />
@@ -192,7 +192,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           type="text"
           label="Last Name"
           register={register}
-          name="lastName"
+          name="lastname"
           errors={errors}
           placeholder="Last Name"
           required={"This field is required"}
@@ -216,7 +216,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
         <DateInput
           label="Date of Birth"
           register={register}
-          name="dateOfBirth"
+          name="dob"
           errors={errors}
           placeholder="YYYY-MM-DD"
           setValue={setValue}

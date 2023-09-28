@@ -161,7 +161,8 @@ const Stpep2Form = () => {
       redirect: 'follow'
     };
     // TODO: update the records and create a new visit here.
-    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value,
+    console.log(value)
+    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details,
       source: "webform" 
      });
     if(resp.data.status == "operation successful"){

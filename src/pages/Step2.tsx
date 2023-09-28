@@ -146,7 +146,7 @@ const Stpep2Form = () => {
     urlencoded.append("firstname", sanitize(value.personal_details.firstName));
     urlencoded.append("middlename", sanitize(value.personal_details.middleName));
     urlencoded.append("lastname", sanitize(value.personal_details.lastName));
-    urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID.slice(0,10)));
+    urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID).slice(0,10));
     urlencoded.append("dob", sanitize(value.personal_details.dateOfBirth));
     urlencoded.append("issue", sanitize(value.personal_details.issueDate));
     urlencoded.append("expiry", sanitize(value.personal_details.expiryDate));
@@ -161,7 +161,7 @@ const Stpep2Form = () => {
       redirect: 'follow'
     };
     // TODO: update the records and create a new visit here.
-    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details, healthcard: value.personal_details.healthCardID.slice(0,10), source: "webform" 
+    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details, healthcard: sanitize(value.personal_details.healthCardID).slice(0,10), source: "webform" 
      });
      console.log(resp.data.status)
     if(resp.data.status == "operation successful"){

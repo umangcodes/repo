@@ -535,7 +535,7 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
     let data = {
       dob: result["dob"],
       expiryDate: result["expDate"],
-      firstName: result["firstname"],
+      firstname: result["firstname"],
       healthCardID: result["heathcard"],
       issueDate: result["issueDate"],
       lastname: result["lastname"],

@@ -12,7 +12,7 @@ export interface Step1Data {
   dob: string,
   expiryDate: string,
   firstname: string,
-  healthCardID: string,
+  healthcard: string,
   issueDate: string,
   lastname: string,
   middlename: string,
@@ -27,7 +27,7 @@ const Step1 = () => {
     dob: "",
     expiryDate: "",
     firstname: "",
-    healthCardID: "",
+    healthcard: "",
     issueDate: "",
     lastname: "",
     middlename: "",
@@ -73,7 +73,7 @@ export type Step1Form = {
   firstname: string,
   middlename: string,
   lastname: string,
-  healthCardID: string,
+  healthcard: string,
   dob: string,
   sex: string,
   issueDate: string,
@@ -86,7 +86,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
       dob: step1Data.dob,
       expiryDate: step1Data.expiryDate,
       firstname: step1Data.firstname,
-      healthCardID: step1Data.healthCardID,
+      healthcard: step1Data.healthcard,
       issueDate: step1Data.issueDate,
       lastname: step1Data.lastname,
       middlename: step1Data.middlename,
@@ -118,7 +118,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
     setValue("dob", step1Data.dob)
     setValue("expiryDate", step1Data.expiryDate)
     setValue("firstname", step1Data.firstname)
-    setValue("healthCardID", step1Data.healthCardID)
+    setValue("healthcard", step1Data.healthcard)
     setValue("issueDate", step1Data.issueDate)
     setValue("lastname", step1Data.lastname)
     setValue("middlename", step1Data.middlename)
@@ -136,7 +136,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
     // console.log(data);
     try{
           console.log("creating new visit")
-          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: step1Data.healthCardID, location: "101"})
+          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: step1Data.healthcard, location: "101"})
           if(resp2.data.msg == "visit created"){
             window.localStorage.setItem("token", resp2.data.token)
             console.log("visit created")
@@ -165,7 +165,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
     if ((value.length === 4 || value.length === 8 || value.length === 11)) {
       value = value + "-";
     }
-    setValue("healthCardID", value);
+    setValue("healthcard", value);
   }
 
   return (
@@ -203,7 +203,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           type="text"
           label="Health Card ID"
           register={register}
-          name="healthCardID"
+          name="healthcard"
           errors={errors}
           onChange={onInputChange}
           placeholder="XXXX - XXX - XXX - XX"

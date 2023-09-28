@@ -536,7 +536,7 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
       dob: result["dob"],
       expiryDate: result["expDate"],
       firstname: result["firstname"],
-      healthCardID: result["heathcard"],
+      healthcard: result["heathcard"],
       issueDate: result["issueDate"],
       lastname: result["lastname"],
       middlename: "",
@@ -544,7 +544,7 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
       signature: "",
       healthCardImage: result["healthCardImage"],
     }
-    data.healthCardID = data.healthCardID.toString().slice(0, 4) + "-" + data.healthCardID.toString().slice(4, 7) + "-" + data.healthCardID.toString().slice(7, 10) + "-" + data.healthCardID.toString().slice(10,);
+    data.healthcard = data.healthcard.toString().slice(0, 4) + "-" + data.healthcard.toString().slice(4, 7) + "-" + data.healthcard.toString().slice(7, 10) + "-" + data.healthcard.toString().slice(10,);
     data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
     data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
     data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)

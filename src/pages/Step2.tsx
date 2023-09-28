@@ -163,7 +163,7 @@ const Stpep2Form = () => {
     // TODO: update the records and create a new visit here.
     const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details, healthcard: value.personal_details.healthCardID.slice(0,10), source: "webform" 
      });
-     console.log(resp.data)
+     console.log(...resp.data)
     if(resp.data.status == "operation successful"){
     console.log("creating new visit", "101")
     const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID.slice(0,10), location: "101"})
@@ -172,7 +172,7 @@ const Stpep2Form = () => {
       console.log("visit created")
       navigate("/registered")
     }else{
-      console.log(resp2)
+      console.log(...resp2.data)
       console.log("error occured.")
     }
     }else{

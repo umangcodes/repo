@@ -218,7 +218,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
                   image: imgSrc,
                 });
                 setResults(res.data);
-
+                console.log(res.data.heathcard)
                 onSuccess({ ...res.data, healthCardImage: imgSrc })
                 setLoading(false);
               } else {

@@ -19,6 +19,7 @@ export interface Step1Data {
   sex: string,
   signature: string,
   healthCardImage: string,
+  vc: string
 }
 
 const Step1 = () => {
@@ -33,6 +34,7 @@ const Step1 = () => {
     sex: "",
     signature: "",
     healthCardImage: "",
+    vc: ""
   })
 
   const { value, updateStep1 } = useContext(Context)

@@ -7,7 +7,7 @@ import ReactSelect from "../components/ReactSelect";
 import TextInput from "../components/TextField";
 import UploadContainer from "../components/UploadContainer";
 import { Context } from "../provider";
-
+import axios from "axios";
 export interface Step1Data {
   dateOfBirth: string,
   expiryDate: string,
@@ -130,8 +130,22 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
   const navigate = useNavigate();
   const { updateStep1 } = useContext(Context)
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     // console.log(data);
+    try{
+          console.log("creating new visit")
+          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: step1Data.healthCardID, location: "101"})
+          if(resp2.data.msg == "visit created"){
+            window.localStorage.setItem("token", resp2.data.token)
+            console.log("visit created")
+            navigate("/registered")
+            // TODO: Route to registered page
+          }else{
+            console.log("error occured.")
+          }
+      }catch(err){
+        console.log("error: " + err)
+      }
     updateStep1({
       ...data,
       healthCardImage: step1Data.healthCardImage,

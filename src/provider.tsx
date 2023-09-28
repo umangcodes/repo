@@ -11,7 +11,8 @@ export interface IStep1 {
   issueDate: string,
   expiryDate: string,
   healthCardImage: string,
-  signature: string
+  signature: string,
+  vc: string
 }
 
 export interface IStep2 {
@@ -39,7 +40,8 @@ let defaultValue: {
     issueDate: "",
     expiryDate: "",
     healthCardImage: "",
-    signature: ""
+    signature: "",
+    vc: ""
 
   },
   address_details: {

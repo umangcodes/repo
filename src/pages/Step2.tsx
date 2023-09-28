@@ -93,7 +93,7 @@ const Stpep2Form = () => {
   const uploadImageToStorage = async (image: string) => {
     const file = convertBase64ToBlob(image);
 
-    const storageRef = ref(storage, `${value.personal_details.healthCardID}.${file.type.split("/")[1]}`);
+    const storageRef = ref(storage, `${value.personal_details.healthcard}.${file.type.split("/")[1]}`);
 
     const snapshot = await uploadBytes(storageRef, file)
     const downloadUrl = await getDownloadURL(snapshot.ref);
@@ -146,12 +146,12 @@ const Stpep2Form = () => {
     urlencoded.append("firstname", sanitize(value.personal_details.firstname));
     urlencoded.append("middlename", sanitize(value.personal_details.middlename));
     urlencoded.append("lastname", sanitize(value.personal_details.lastname));
-    urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID).slice(0,10));
+    urlencoded.append("healthcard", sanitize(value.personal_details.healthcard).slice(0,10));
     urlencoded.append("dob", sanitize(value.personal_details.dob));
     urlencoded.append("issue", sanitize(value.personal_details.issueDate));
     urlencoded.append("expiry", sanitize(value.personal_details.expiryDate));
     urlencoded.append("phone", sanitize(data.phoneNumber));
-    urlencoded.append("address", sanitize(data.address));
+    urlencoded.append("address", data.address);
     urlencoded.append("email", sanitize(data.email));
 
     var requestOptions = {
@@ -161,12 +161,12 @@ const Stpep2Form = () => {
       redirect: 'follow'
     };
     // TODO: update the records and create a new visit here.
-    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details, healthcard: sanitize(value.personal_details.healthCardID).slice(0,10), source: "webform" 
+    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details, healthcard: sanitize(value.personal_details.healthcard).slice(0,10), source: "webform" 
      });
      console.log(resp.data.status)
     if(resp.data.status == "operation successful"){
     console.log("creating new visit", "101")
-    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(value.personal_details.healthCardID).slice(0,10), location: "101"})
+    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(value.personal_details.healthcard).slice(0,10), location: "101"})
     console.log(resp2.data.msg)
     if(resp2.data.msg == "visit created"){
       window.localStorage.setItem("token", resp2.data.token)
@@ -194,7 +194,7 @@ const Stpep2Form = () => {
           id: docRef.id,
           created_at: serverTimestamp()
         }).then(async () => {
-          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID.slice(0,10), location: "101"})
+          const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthcard.slice(0,10), location: "101"})
           if(resp2.data.msg == "visit created"){
             window.localStorage.setItem("token", resp2.data.token)
             console.log("visit created")

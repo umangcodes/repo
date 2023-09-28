@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
-
+import Step3 from './pages/Step3';
 function App() {
   const [loading, setLoading] = useState(false);
   return (
@@ -19,6 +19,12 @@ function App() {
         <Route path='/fill-address' element={
           <Layout>
             <Step2 />
+          </Layout>
+        } />
+
+        <Route path='/registered' element={
+          <Layout>
+            <Step3 />
           </Layout>
         } />
       </Routes>

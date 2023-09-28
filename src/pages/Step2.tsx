@@ -165,7 +165,7 @@ const Stpep2Form = () => {
     const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...value.personal_details,
       source: "webform" 
      });
-     console.log(resp)
+     console.log(resp.data)
     if(resp.data.status == "operation successful"){
     console.log("creating new visit", "101")
     const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: value.personal_details.healthCardID, location: "101"})

@@ -156,6 +156,7 @@ const Stpep2Form = () => {
       body: urlencoded,
       redirect: 'follow'
     };
+    // TODO: update the records and create a new visit here.
 
     //@ts-ignore
     fetch(process.env.REACT_APP_REGISTER_PATIENT!, requestOptions)

@@ -218,8 +218,24 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
                 const res = await axios.post("https://healthcard-ocr.nn.r.appspot.com/scan", {
                   image: imgSrc,
                 });
-
                 setResults(res.data);
+                // TODO: check for the healthcard if exist in the database here!!
+                try{
+                    console.log("creating new visit")
+                    const resp2 = await axios.post(process.env.REACT_APP_CREATE_NEW_VISIT, {healthcard: res.data.heathcard, location: "101"})
+                    if(resp2.data.msg == "visit created"){
+                      window.localStorage.setItem("token", resp2.data.token)
+                      console.log("visit created")
+                      // router.push("/registered")
+                      // TODO: Route to registered page
+                    }else{
+                      console.log("error occured.")
+                    }
+                }catch(err){
+                  console.log("error: " + err)
+                }
+                
+
                 onSuccess({ ...res.data, healthCardImage: imgSrc })
                 setLoading(false);
               } else {

@@ -9,13 +9,13 @@ import UploadContainer from "../components/UploadContainer";
 import { Context } from "../provider";
 import axios from "axios";
 export interface Step1Data {
-  dateOfBirth: string,
+  dob: string,
   expiryDate: string,
-  firstName: string,
+  firstname: string,
   healthCardID: string,
   issueDate: string,
-  lastName: string,
-  middleName: string,
+  lastname: string,
+  middlename: string,
   sex: string,
   signature: string,
   healthCardImage: string,
@@ -24,13 +24,13 @@ export interface Step1Data {
 
 const Step1 = () => {
   const [step1Data, setStep1Data] = useState<Step1Data>({
-    dateOfBirth: "",
+    dob: "",
     expiryDate: "",
-    firstName: "",
+    firstname: "",
     healthCardID: "",
     issueDate: "",
-    lastName: "",
-    middleName: "",
+    lastname: "",
+    middlename: "",
     sex: "",
     signature: "",
     healthCardImage: "",
@@ -70,11 +70,11 @@ const Step1 = () => {
 
 
 export type Step1Form = {
-  firstName: string,
-  middleName: string,
-  lastName: string,
+  firstname: string,
+  middlename: string,
+  lastname: string,
   healthCardID: string,
-  dateOfBirth: string,
+  dob: string,
   sex: string,
   issueDate: string,
   expiryDate: string
@@ -83,13 +83,13 @@ export type Step1Form = {
 const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
   const { handleSubmit, watch, register, control, formState: { errors }, setValue } = useForm<Step1Form>({
     defaultValues: {
-      dateOfBirth: step1Data.dateOfBirth,
+      dob: step1Data.dob,
       expiryDate: step1Data.expiryDate,
-      firstName: step1Data.firstName,
+      firstname: step1Data.firstname,
       healthCardID: step1Data.healthCardID,
       issueDate: step1Data.issueDate,
-      lastName: step1Data.lastName,
-      middleName: step1Data.middleName,
+      lastname: step1Data.lastname,
+      middlename: step1Data.middlename,
       sex: step1Data.sex
     }
   });
@@ -115,13 +115,13 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
 
   useEffect(() => {
     // console.log(step1Data);
-    setValue("dateOfBirth", step1Data.dateOfBirth)
+    setValue("dob", step1Data.dob)
     setValue("expiryDate", step1Data.expiryDate)
-    setValue("firstName", step1Data.firstName)
+    setValue("firstname", step1Data.firstname)
     setValue("healthCardID", step1Data.healthCardID)
     setValue("issueDate", step1Data.issueDate)
-    setValue("lastName", step1Data.lastName)
-    setValue("middleName", step1Data.middleName)
+    setValue("lastname", step1Data.lastname)
+    setValue("middlename", step1Data.middlename)
     setValue("sex", step1Data.sex)
     let base64Type = detectMimeType(step1Data.signature);
     setSignature(`data:${base64Type};base64, ${step1Data.signature}`)

@@ -62,7 +62,7 @@ const Stpep2Form = () => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (!value.personal_details.firstName) {
+    if (!value.personal_details.firstname) {
       navigate('/');
     }
   }, []);
@@ -143,11 +143,11 @@ const Stpep2Form = () => {
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
     var urlencoded = new URLSearchParams();
-    urlencoded.append("firstname", sanitize(value.personal_details.firstName));
-    urlencoded.append("middlename", sanitize(value.personal_details.middleName));
-    urlencoded.append("lastname", sanitize(value.personal_details.lastName));
+    urlencoded.append("firstname", sanitize(value.personal_details.firstname));
+    urlencoded.append("middlename", sanitize(value.personal_details.middlename));
+    urlencoded.append("lastname", sanitize(value.personal_details.lastname));
     urlencoded.append("healthcard", sanitize(value.personal_details.healthCardID).slice(0,10));
-    urlencoded.append("dob", sanitize(value.personal_details.dateOfBirth));
+    urlencoded.append("dob", sanitize(value.personal_details.dob));
     urlencoded.append("issue", sanitize(value.personal_details.issueDate));
     urlencoded.append("expiry", sanitize(value.personal_details.expiryDate));
     urlencoded.append("phone", sanitize(data.phoneNumber));

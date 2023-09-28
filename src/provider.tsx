@@ -2,11 +2,11 @@ import React from 'react';
 import { createContext, useState } from 'react'
 
 export interface IStep1 {
-  firstName: string,
-  middleName: string,
-  lastName: string,
+  firstname: string,
+  middlename: string,
+  lastname: string,
   healthCardID: string,
-  dateOfBirth: string,
+  dob: string,
   sex: string,
   issueDate: string,
   expiryDate: string,
@@ -31,11 +31,11 @@ let defaultValue: {
   address_details: IStep2
 } = {
   personal_details: {
-    firstName: "",
-    middleName: "",
-    lastName: "",
+    firstname: "",
+    middlename: "",
+    lastname: "",
     healthCardID: "",
-    dateOfBirth: "",
+    dob: "",
     sex: "",
     issueDate: "",
     expiryDate: "",

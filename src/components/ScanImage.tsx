@@ -100,6 +100,7 @@ const ScanImage = ({ model, setShowCamera, imagetake, onImageDetect }: any) => {
       const imgSrc = tCanvas.toDataURL("image/png", 1.0);
       onImageDetect(imgSrc);
       setLoading(false);
+      setShowOptions(false)
       reset();
     } else {
       // toast.error((t) => (

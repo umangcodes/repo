@@ -59,7 +59,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
   const [capturedImage, setCapturedImage] = React.useState<File>();
   const [showOptions, setShowOptions] = React.useState(false);
   const [showCamera, setShowCamera] = React.useState(false);
-  const navigate = useNavigate()
+
   const { ready: pdfjsReady } = useScript({
     src: "https://mozilla.github.io/pdf.js/build/pdf.js",
   });
@@ -349,14 +349,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
     setResults(data);
     onSuccess({ ...data, healthCardImage: imgSrc })
     setLoading(false);
-    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: "101"}).then(async (resp) => {
-      if(resp.data.msg == "visit created"){
-        window.localStorage.setItem("token", resp.data.token)
-        navigate("/registered")
-      }else{
-        console.log("error occured.")
-      }
-    }, err => {console.log(err.message)})
+    
   }
 
   if (showCamera && showOptions) {
@@ -559,7 +552,14 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
     data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
     data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
     data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)
-    
+    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: "101"}).then(async (resp) => {
+      if(resp.data.msg == "visit created"){
+        window.localStorage.setItem("token", resp.data.token)
+        navigate("/registered")
+      }else{
+        console.log("error occured.")
+      }
+    }, err => {console.log(err.message)})
     setStep1Data(data);
   }
 

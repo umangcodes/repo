@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ref, uploadBytes } from "firebase/storage";
@@ -9,6 +9,7 @@ import { CAMERA, CLOSE_RED, LOADER_PRIMARY, MENU, PLUS } from "../assets";
 import { storage } from "../firebase";
 import Portal from "./Portal";
 import ScanImage from "./ScanImage";
+import { Context } from "../provider";
 
 const convertBase64ToBlob = (base64Image: any) => {
   // Split into two parts
@@ -500,6 +501,8 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
 const UploadContainer = ({ step1Data, setStep1Data }: any) => {
   const [model, setModel] = React.useState(null);
   const navigate = useNavigate()
+  const {value} = useContext(Context)
+
   const { ready: tfjsReady } = useScript({
     src: "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js",
   });
@@ -552,7 +555,7 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
     data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
     data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
     data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)
-    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: "101"}).then(async (resp) => {
+    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: value.location_details.location}).then(async (resp) => {
       if(resp.data.msg == "visit created"){
         window.localStorage.setItem("token", resp.data.token)
         navigate("/registered")

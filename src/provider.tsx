@@ -1,4 +1,3 @@
-import React from 'react';
 import { createContext, useState } from 'react'
 
 export interface IStep1 {
@@ -26,9 +25,14 @@ export interface IStep2 {
   country: string
 }
 
+export interface ILocation {
+  location: String,
+}
+
 let defaultValue: {
   personal_details: IStep1,
-  address_details: IStep2
+  address_details: IStep2,
+  location_details: ILocation
 } = {
   personal_details: {
     firstname: "",
@@ -53,6 +57,9 @@ let defaultValue: {
     province: "",
     postalCode: "",
     country: ""
+  },
+  location_details:{
+    location: ""
   }
 }
 
@@ -60,6 +67,7 @@ export const Context = createContext({
   value: defaultValue,
   updateStep1: (data: IStep1) => { },
   updateStep2: (data: IStep2) => { },
+  updateLocation: (data: ILocation) => { },
   resetValues: () => { }
 });
 
@@ -81,10 +89,17 @@ const Provider = ({ children }: { children: JSX.Element }) => {
     })
   }
 
+  const updateLocation = (data: ILocation) => {
+    setValue({
+      ...value,
+      location_details: data
+    })
+  }
+
   const resetValues = () => {
     setValue(defaultValue);
   }
-  return <Context.Provider value={{ value, updateStep1, updateStep2, resetValues }}  >
+  return <Context.Provider value={{ value, updateStep1, updateStep2, updateLocation, resetValues }}  >
     {children}
   </Context.Provider>
 }

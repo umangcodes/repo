@@ -6,11 +6,17 @@ import Sidebar from './components/Sidebar';
 import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
 import Step3 from './pages/Step3';
+import Location from "./pages/Location"
+
 function App() {
   const [loading, setLoading] = useState(false);
   return (
     <Router>
       <Routes>
+      <Route path='/location/:id' element={
+          <Location />
+        }/>
+
         <Route path='/' element={
           <Layout>
             <Step1 />

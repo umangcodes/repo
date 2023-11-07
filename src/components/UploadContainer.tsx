@@ -62,7 +62,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
   const [showCamera, setShowCamera] = React.useState(false);
 
   const { ready: pdfjsReady } = useScript({
-    src: "https://www.jsdelivr.com/package/npm/pdfjs-dist",
+    src: "https://www.jsdelivr.com/package/npm/pdfjs-dist@4.0.189/build/pdf.mjs",
   });
 
   React.useEffect(() => {
@@ -140,7 +140,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
           reader.addEventListener("load", async () => {
             //  @ts-ignore
             const pdfjsLib = window["pdfjs-dist/build/pdf"];
-            // pdfjsLib.GlobalWorkerOptions.workerSrc = "https://mozilla.github.io/pdf.js/build/pdf.worker.js";
+            pdfjsLib.GlobalWorkerOptions.workerSrc = "https://www.jsdelivr.com/package/npm/pdf-dist@4.0.189/build/pdf.worker.mjs";
 
             //  @ts-ignore
             const typedarray = new Uint8Array(reader.result);

@@ -170,7 +170,7 @@ const ScanImage = ({ model, setShowCamera, imagetake, onImageDetect }: any) => {
 
                 <div onClick={() => imagetake(webcamRef)}
                   className="w-16 h-16 p-2 rounded-full border-2 flex items-center justify-center border-white absolute left-1/2 -translate-x-1/2 bottom-5 z-50">
-                  <div className="w-12 h-12 bg-white rounded-full">click</div>
+                  <div className="w-12 h-12 bg-white rounded-full"></div>
                 </div>
               </>
               :

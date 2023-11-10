@@ -62,7 +62,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
   const [showCamera, setShowCamera] = React.useState(false);
 
   const { ready: pdfjsReady } = useScript({
-    src: "https://www.unpkg.com/browse/pdfjs-dist@3.11.174/build/pdf.js",
+    src: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.10.111/pdf.js",
   });
 
   React.useEffect(() => {
@@ -140,7 +140,7 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
           reader.addEventListener("load", async () => {
             //  @ts-ignore
             const pdfjsLib = window["pdfjs-dist/build/pdf"];
-            pdfjsLib.GlobalWorkerOptions.workerSrc = "https://unpkg.com/browse/pdfjs-dist@3.11.174/build/pdf.worker.js";
+            pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.10.111/pdf.worker.js";
 
             //  @ts-ignore
             const typedarray = new Uint8Array(reader.result);

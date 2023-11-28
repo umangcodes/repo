@@ -218,7 +218,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           register={register}
           name="dob"
           errors={errors}
-          placeholder="YYYY-MM-DD"
+          placeholder="DOB in YYYY-MM-DD FORMAT"
           setValue={setValue}
         />
 
@@ -253,7 +253,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           register={register}
           name="issueDate"
           errors={errors}
-          placeholder="YYYY-MM-DD"
+          placeholder="Card Issue Date YYYY-MM-DD"
           setValue={setValue}
         />
         <DateInput
@@ -261,7 +261,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
           register={register}
           name="expiryDate"
           errors={errors}
-          placeholder="YYYY-MM-DD"
+          placeholder="Card Expiry Date YYYY-MM-DD"
           setValue={setValue}
         />
       </div>

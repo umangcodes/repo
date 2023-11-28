@@ -555,7 +555,7 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
     data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
     data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
     data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)
-    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: value.location_details.location}).then(async (resp) => {
+    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: value.location_details.location, source: "webform"}).then(async (resp) => {
       if(resp.data.msg == "visit created"){
         window.localStorage.setItem("token", resp.data.token)
         navigate("/registered")

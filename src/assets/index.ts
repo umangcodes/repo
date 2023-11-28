@@ -1,4 +1,4 @@
-import BRAND_LOGO from './icons/brand_logo.svg';
+import BRAND_LOGO from './icons/brand_logo.png';
 import SIDEBAR_BACKGROUND from './images/sidebar_background.png';
 import BG from './images/bg.svg'
 

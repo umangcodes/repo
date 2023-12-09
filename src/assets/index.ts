@@ -17,7 +17,9 @@ import LOADER from './icons/loader.svg';
 import LOADER_PRIMARY from './icons/loader_blue.svg';
 import CANCEL from './icons/cancel.svg';
 import OK from './icons/ok.svg';
-
+import CHECKMARK from "./images/checkmark.gif"
+import APPOINTMENT from "./images/appoitment.png"
+import REPORT from "./images/report.png"
 export {
   BRAND_LOGO,
   SIDEBAR_BACKGROUND,
@@ -33,5 +35,8 @@ export {
   LOADER,
   LOADER_PRIMARY,
   OK,
-  CANCEL
+  CANCEL,
+  CHECKMARK,
+  APPOINTMENT,
+  REPORT,
 }

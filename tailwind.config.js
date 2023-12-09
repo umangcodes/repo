@@ -14,7 +14,13 @@ module.exports = {
       fontFamily: {
         'oswald': ['Oswald', 'sans-serif'],
         'inter': ['Inter', 'sans-serif']
-      }
+      },
+      fontSize:{
+        "min": "10px"
+      },
+      // backgroundImage:{
+      //   'checkmark': "url('/src/assets/images/checkmark.gif')"
+      // }
     },
   },
   plugins: [],

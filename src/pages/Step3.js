@@ -16,8 +16,8 @@ const Step3 = () => {
             <h2 className="text-center text-2xl">You are in queue!</h2>
             <h4 className="text-center text-xl pt-5">Token</h4>
             <div className="flex h-48 w-[230px] -mt-5">
-              <img src={CHECKMARK} alt="registered. In queue." className="rounded-full opacity-5" />
-              <p className="z-20 -mx-[135px] mt-[80px] text-4xl font-bold">{token}</p>
+              <img src={CHECKMARK} alt="registered. In queue." className="rounded-full opacity-20" />
+              <p className="z-20 -mx-[130px] mt-[80px] text-4xl font-bold">{token}</p>
           </div>
           </div>
           <div className="text-center">

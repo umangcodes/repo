@@ -17,11 +17,11 @@ const Step3 = () => {
             <h4 className="text-center text-xl pt-5">Token</h4>
             <div className="flex h-48 w-[230px] -mt-5">
               <img src={CHECKMARK} alt="registered. In queue." className="rounded-full opacity-5" />
-              <p className="z-20 -mx-[135px] mt-[80px] text-4xl font-bold">10</p>
+              <p className="z-20 -mx-[135px] mt-[80px] text-4xl font-bold">{token}</p>
           </div>
           </div>
           <div className="text-center">
-            Email requisition at <a to="mailto: scc@mhlab.ca" className="italic text-blue-800 underline font-semibold">scc@mhlab.ca</a>
+            Email requisition at <a href="mailto: scc@mhlab.ca" className="italic text-blue-800 underline font-semibold">scc@mhlab.ca</a>
           </div>
           <div>
             <Carousel />

@@ -28,7 +28,7 @@ function Carousel() {
     },[timeUp])
 
   return (
-    <div className="flex h-96">
+    <div className="flex h-96 mt-2">
         <SlideSelector currentPage={currentPage} timeUp={timeUp} setTimeUp={setTimeUp}/> 
     </div>
   )

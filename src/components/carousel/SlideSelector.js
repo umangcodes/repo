@@ -4,15 +4,17 @@ import Slide2 from "./slides/Slide2"
 import Slide3 from "./slides/Slide3"
 import Slide4 from "./slides/Slide4"
 import Slide5 from "./slides/Slide5"
+import Slidex from "./slides/Slidex"
 function SlideSelector({currentPage, timeUp, setTimeUp}) {
     useEffect(() => {
-        setTimeout(() =>{
-            setTimeUp(val => val = !val)
-        },5000)
+        // setTimeout(() =>{
+        //     setTimeUp(val => val = !val)
+        //     console.log("update")
+        // },5000)
     },[timeUp])
       switch(currentPage){
         case 1:
-            return <Slide1 />
+            return <Slidex />
         case 2:
             return <Slide2 />
         case 3:

@@ -19,7 +19,15 @@ import CANCEL from './icons/cancel.svg';
 import OK from './icons/ok.svg';
 import CHECKMARK from "./images/checkmark.gif"
 import APPOINTMENT from "./images/appoitment.png"
-import REPORT from "./images/report.png"
+import REPORT from "./icons/report.png"
+import EMAIL from "./icons/email.png"
+import BOOKNOW from "./icons/booking.png"
+import HELP from "./icons/help.png"
+import FAQ from "./icons/faq.png"
+import TECH from "./icons/customer-support.png"
+import PAYMENT from "./icons/dollar-symbol.png"
+import BILL from "./icons/bill.png"
+import WHATSAPP from "./icons/whatsapp.png"
 export {
   BRAND_LOGO,
   SIDEBAR_BACKGROUND,
@@ -39,4 +47,12 @@ export {
   CHECKMARK,
   APPOINTMENT,
   REPORT,
+  EMAIL,
+  BOOKNOW,
+  HELP,
+  FAQ,
+  TECH,
+  PAYMENT,
+  BILL,
+  WHATSAPP
 }

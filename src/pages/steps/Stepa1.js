@@ -67,14 +67,18 @@ function Stepa1() {
   };
 
   const onLoad = () =>{
-    setStep1Data({firstname : newContextValue.step1.firstname, lastname: newContextValue.step1.lastname, middlename: newContextValue.step1.middlename, healthcard: newContextValue.step1.healthcard })
-    setErrors({
-      ...errors,
+    setStep1Data({
+                    firstname : newContextValue.step1.firstname, 
+                    lastname: newContextValue.step1.lastname, 
+                    middlename: newContextValue.step1.middlename, 
+                    healthcard: newContextValue.step1.healthcard 
+                  })
+    setErrors(val => ({
+      ...val,
       firstname: validate("firstname", newContextValue.step1.firstname),
       lastname: validate("lastname", newContextValue.step1.lastname),
       healthcard: validate("healthcard", newContextValue.step1.healthcard),
-
-    })
+    }))
   }
 
   useEffect(() => {
@@ -84,13 +88,19 @@ function Stepa1() {
   useEffect(() => {
     if (newContextValue.step1) {
       setStep1Data(newContextValue.step1);
+      setErrors(val => ({
+        ...val,
+        firstname: validate("firstname", newContextValue.step1.firstname),
+        lastname: validate("lastname", newContextValue.step1.lastname),
+        healthcard: validate("healthcard", newContextValue.step1.healthcard),
+      }))
     }
     checkOverallValidation()
-  }, [errors, newContextValue]);
+  }, [newContextValue]);
 
   useEffect(() => {
     updatePages({step1: stageValidationPass})
-  },[errors, stageValidationPass])
+  },[stageValidationPass])
   return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
       <div>

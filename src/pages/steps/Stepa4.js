@@ -72,7 +72,7 @@ function Stepa4() {
           type="text"
           label="phone"
           name="phone"
-          placeholder={step4Data.phone || "YYYYMMDD"}
+          placeholder={step4Data.phone || "1234567890"}
           value={step4Data.phone}
           onChange={handleChange}
           className="border rounded-md px-2 text-xl py-2 w-full"

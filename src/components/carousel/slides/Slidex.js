@@ -18,7 +18,7 @@ function Slidex() {
                 </a>
             </li>
 
-            <li onClick={()=>{window.open("https://results.mhlab.ca/patient/#/login/")}}> 
+            <li onClick={()=>{window.open("https://results.mhlab.ca/patient/#/login/")}} className="hover:cursor-pointer"> 
                 <div className="flex border border-secondaryShade h-20 px-5 items-center rounded-xl justify-between shadow-special">
                     <img src={REPORT} alt="Check your results" className="h-8"/>
                     <div className="flex flex-col justify-end items-end">
@@ -39,16 +39,15 @@ function Slidex() {
             </li> */}
 
             <li onClick={()=>{window.open("https://wa.me/message/BSYRCTM24GN6C1?src=qr")}}>
-                <a href="https://wa.me/message/BSYRCTM24GN6C1?src=qr">
+                {/* <a href="https://wa.me/message/BSYRCTM24GN6C1?src=qr"> */}
                     <div className="flex border border-secondaryShade h-20 px-5 items-center rounded-xl justify-between shadow-special">
                         <img src={WHATSAPP} alt="Need help" className="h-8"/>
                         <div className="flex flex-col justify-end items-end">
                             <h1 className="text-lg font-semibold text-secondary">Billing Queries</h1>
-                            {/* <a href="mailto:info@mhlab.ca">Contact our main lab</a> */}
                             <h2>Chat with us on whatsapp!</h2>
                         </div>
                     </div>
-                </a>
+                {/* </a> */}
             </li>
 
             <li onClick={()=>{setActivateModal(true)}}>

@@ -1,45 +1,96 @@
 import React, {useState, useEffect, useContext} from "react"
 import { StepContext } from "../../context/stepsContext";
+import {motion} from "framer-motion"
+
 function Stepa4() {
+  const [errors, setErrors] = useState({phone: " ", email: " "});
+  const [stageValidationPass, setStageValidationPass] = useState(false)
   const [step4Data, setStep4Data] = useState({
     phone:"",
-    email:""
+    email:"",
+    confirmEmail:""
   })
 
-  const { newContextValue, updateNewStep4 } = useContext(StepContext)
+  const validate = (name, value) => {
+    switch (name) {
+      case "phone":
+        if(!value){
+          return "Required"
+        }
+        if (!/^\d{10}$/.test(value)) {
+          return "Must be a 10 digit number";
+        }
+        break;
+      case "email":
+        if(!value){
+          return "Required"
+        }
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
+          return "Enter a valid email address.";
+        }
+        break;
+      default:
+        return "";
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const error = validate(name, value);
+      setErrors({
+        ...errors,
+        [name]: error !== undefined ? error : null,
+      });
+      updateNewStep4({ [name]: value });
+  }
+
+  const { newContextValue, updateNewStep4, updatePages } = useContext(StepContext)
+  
+  const checkOverallValidation = () => {
+    const hasErrors = Object.values(errors).some(error => error);
+    console.log(errors)
+    console.log("errors on this page: " + hasErrors)
+    setStageValidationPass(!hasErrors);
+  };
 
   useEffect(() => {
-    if (newContextValue.step4) {
+    if (newContextValue.step1) {
       setStep4Data(newContextValue.step4);
     }
-    console.log(newContextValue)
+    checkOverallValidation()
+    console.log(errors)
   }, [newContextValue]);
+
+  useEffect(() => {
+    updatePages({step4: stageValidationPass})
+  },[stageValidationPass])
+
   return (
-    <>
-      <p>Phone</p>
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
+      <p className="text-xl font-semibold capitalize">Phone* <label className="text-sm font-light">(Format: 1234567890)</label></p>
       <input
-          type="number"
+          type="text"
           label="phone"
           name="phone"
-          autoComplete="phone"
-          placeholder={step4Data.phone}
+          placeholder={step4Data.phone || "YYYYMMDD"}
           value={step4Data.phone}
-          onChange={(e)=>{updateNewStep4({phone: e.target.value})}}
-          className="border rounded-xl px-2 mx-5"
+          onChange={handleChange}
+          className="border rounded-md px-2 text-xl py-2 w-full"
         />
-      
-      <p>Email</p>
+        {errors.phone && <p className="text-red-500">{errors.phone}</p>}
+
+      <p className="text-xl font-semibold ">Email* <label className="text-sm font-light">(Format: johndoe@domain.co)</label></p>
       <input
           type="text"
           label="email"
           name="email"
-          autoComplete="email"
-          placeholder={step4Data.email}
+          placeholder={step4Data.email || "johndoe@domain.co"}
           value={step4Data.email}
-          onChange={(e)=>{updateNewStep4({email: e.target.value})}}
-          className="border rounded-xl px-2 mx-5"
+          onChange={handleChange}
+          className="border rounded-md px-2 text-xl py-2 w-full"
         />
-    </>
+      {errors.email && <p className="text-red-500">{errors.email}</p>}
+    </motion.div>
   )
 }
 

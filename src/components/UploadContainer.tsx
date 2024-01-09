@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ref, uploadBytes } from "firebase/storage";
@@ -10,7 +10,7 @@ import { storage } from "../firebase";
 import Portal from "./Portal";
 import ScanImage from "./ScanImage";
 import { Context } from "../provider";
-
+import {StepContext} from "../context/stepsContext"
 const convertBase64ToBlob = (base64Image: any) => {
   // Split into two parts
   const parts = base64Image.split(";base64,");
@@ -461,8 +461,8 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
             </div>
 
             <div className="w-full max-w-xl min-h-32 rounded-2xl px-5 py-7 bg-gradient-to-r from-primary/70 to-primary/40">
-              <p className="text-sm text-black mb-2 font-medium">You can upload Health card simply by clicking the plus button to auto populate the form.</p>
-              <p className="text-sm text-black mb-2 font-medium"><span className="font-bold">Note:</span> In case of error, Please try uploding again</p>
+              <p className="text-sm text-black mb-2 font-medium">Click on the Plus(+) button to scan your healthcard</p>
+              <p className="text-sm text-black mb-2 font-medium"><span className="font-bold">Note:</span> In case of error, Please try scanning again</p>
             </div>
           </>
         }
@@ -501,8 +501,10 @@ const UploadImage = ({ model, onSuccess, step1Data }: any) => {
 const UploadContainer = ({ step1Data, setStep1Data }: any) => {
   const [model, setModel] = React.useState(null);
   const navigate = useNavigate()
-  const {value} = useContext(Context)
-
+  const {newContextValue} = useContext(StepContext)
+  useEffect(() => {
+    console.log(newContextValue)
+  },[newContextValue])
   const { ready: tfjsReady } = useScript({
     src: "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js",
   });
@@ -512,7 +514,8 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
   const { ready: tfliteReady } = useScript({
     src: "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite@0.0.1-alpha.8/dist/tf-tflite.min.js",
   });
-
+  const {updateStep1} = useContext(Context)
+  const {updateNewStep1} = useContext(StepContext)
   React.useEffect(() => {
     if (!tfjsReady || !cocoSsdReady || !tfliteReady) {
       return;
@@ -555,16 +558,39 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
     data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
     data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
     data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)
-    await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: value.location_details.location, source: "webform"}).then(async (resp) => {
-      if(resp.data.msg == "visit created"){
-        window.localStorage.setItem("token", resp.data.token)
-        navigate("/registered")
-      }else{
-        console.log("error occured.")
+    console.log(data)
+    updateStep1({...data, vc:""})
+    const tranformDataStep1 = (data:any) => {
+      return {
+        firstname: data.firstname,
+        middlename: data.middlename,
+        lastname: data.lastname,
+        healthcard: data.healthcard,
+        vc: sanitize(data.healthcard).slice(10,12),
+        sex: data.sex,
+        dob: data.dob,
+        issueDate: data.issueDate,
+        expiryDate: data.expiryDate
       }
-    }, err => {console.log(err.message)})
+    }
+    const tranformDataStep2 = (data:any) => {
+      return {
+        
+      }
+    }
+    updateNewStep1({...tranformDataStep1(data)})
+    // updateNewStep2({...tranformDataStep2(data)})
+    // await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(data.healthcard).slice(0,10), location: value.location_details.location, source: "webform"}).then(async (resp) => {
+    //   if(resp.data.msg == "visit created"){
+    //     window.localStorage.setItem("token", resp.data.token)
+    //     navigate("/registered")
+    //   }else{
+    //     console.log("error occured.")
+    //   }
+    // }, err => {console.log(err.message)})
     setStep1Data(data);
   }
+  
 
   return (
     <>

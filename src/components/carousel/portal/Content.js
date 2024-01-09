@@ -20,8 +20,8 @@ export default function Content({onClose}) {
                         <div className="flex border h-20 px-5 items-center rounded-xl justify-between shadow-special">
                             <img src={TECH} alt="Tech Support" className="h-8"/>
                             <div className="flex flex-col justify-end items-end">
-                                <h1 className="text-lg font-semibold text-secondary">Tech Support</h1>
-                                <a href="mailto:support@mhlab.ca">Contact IT</a>
+                                <h1 className="text-lg font-semibold text-secondary">Technical issues</h1>
+                                <a href="mailto:support@mhlab.ca">Contact IT support</a>
                             </div>
                         </div>
                     </a>
@@ -44,8 +44,8 @@ export default function Content({onClose}) {
                         <div className="flex border h-20 px-5 items-center rounded-xl justify-between shadow-special">
                             <img src={BILL} alt="Billing" className="h-8"/>
                             <div className="flex flex-col justify-end items-end">
-                                <h1 className="text-lg font-semibold text-secondary">Invoice</h1>
-                                <a href="mailto:accounting@mhlab.ca">Need help with bills</a>
+                                <h1 className="text-lg font-semibold text-secondary">Invoice / Bills</h1>
+                                <a href="mailto:accounting@mhlab.ca">Email at accounting@mhlab.ca</a>
                             </div>
                         </div>
                     </a>

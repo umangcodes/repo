@@ -8,6 +8,12 @@ import TextInput from "../components/TextField";
 import UploadContainer from "../components/UploadContainer";
 import { Context } from "../provider";
 import axios from "axios";
+import Stepa1 from "./steps/Stepa1";
+import SelectedStep from "./steps/SelectedStep";
+import { StepContext } from "../context/stepsContext";
+
+
+
 export interface Step1Data {
   dob: string,
   expiryDate: string,
@@ -23,6 +29,7 @@ export interface Step1Data {
 }
 
 const Step1 = () => {
+  const navigate = useNavigate();
   const [step1Data, setStep1Data] = useState<Step1Data>({
     dob: "",
     expiryDate: "",
@@ -38,31 +45,84 @@ const Step1 = () => {
   })
 
   const { value, updateStep1 } = useContext(Context)
+  const [currentPage, setCurrentPage] = useState(1)
+  const { newContextValue } = useContext(StepContext)
+  function sanitize(string:string) {
+    const reg = /[/|&<>"'=-]/ig;
+    return string.replace(reg, (match) => "");
+  }
 
   useEffect(() => {
     if (value.personal_details) {
       setStep1Data(value.personal_details);
+      console.log(step1Data)
     }
   }, []);
 
+  useEffect(()=>{
+    console.log(newContextValue)
+    if(currentPage > 5){
+      setCurrentPage(1)
+    }
+    if(currentPage < 1){
+      setCurrentPage(1)
+    }
+  },[newContextValue, currentPage])
 
-  const submitStep1 = (data: Step1Data) => {
-    console.log(data);
+
+  const submitForm = async () => {
+    console.log(newContextValue)
+    window.localStorage.setItem("healthcard", newContextValue.step1.healthcard)
+    window.localStorage.setItem("location", newContextValue.location_details.location.toString())
+
+    const resp = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/registerPatient", {...newContextValue.step1, phone: sanitize(newContextValue.step4.phone), email: sanitize(newContextValue.step4.email) ,address: newContextValue.step3.address, healthcard: sanitize(newContextValue.step1.healthcard).slice(0,10), healthCardImage: "", source: "webform" 
+     });
+     console.log(resp.data.status)
+    if(resp.data.status == "operation successful"){
+    console.log("creating new visit", value.location_details.location.toString())
+    const resp2 = await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/newVisit", {healthcard: sanitize(newContextValue.step1.healthcard).slice(0,10), location: newContextValue.location_details.location.toString()})
+    console.log(resp2.data.msg)
+    if(resp2.data.msg == "visit created"){
+      window.localStorage.setItem("token", resp2.data.token)
+      console.log("visit created")
+      navigate("/registered")
+    }else{
+      console.log(resp2.data)
+      console.log("error occured.")
+    }
+    }else{
+    console.log("something went wrong...")
+    }
   }
 
   return (
     <div className="w-full min-h-screen md:py-10 md:px-10 flex">
-      <div className="w-full flex flex-col items-start flex-grow bg-background drop-shadow-xl p-5">
-        <h1 className="text-xl md:text-2xl font-semibold mb-4">Step 1: Upload your healthcard</h1>
-        <p className="text-sm text-black/60">Upload your healthcard to autofill the details or Enter manually.</p>
+      <div className="w-full flex flex-col items-center flex-grow bg-background drop-shadow-xl p-5">
+        <h1 className="text-2xl md:text-2xl font-semibold mb-4 text-center">Express Check-in</h1>
+        <p className="text-sm text-black/60 text-center">Autofill by scanning your health card or Enter manually</p>
 
         <UploadContainer
           setStep1Data={setStep1Data}
           step1Data={step1Data} />
-
-        <div className="w-full flex items-center">
+          <div className="flex flex-col justify-center px-5 w-full">
+            <SelectedStep currentPage={currentPage}/>
+          </div>
+          <div className="flex gap-5 my-5 w-full items-center justify-around">
+            {currentPage === 1 ? "" : <button type="button" className="outline-none border rounded-md px-16 py-2 hover:shadow-lg shadow-sm bg-primary/80 text-white font-semibold" onClick={()=> {setCurrentPage(page => page = page-1)}}>Back</button>
+            }
+            {
+              currentPage === 5 ? 
+                newContextValue.pages.step1 && newContextValue.pages.step4 ? 
+                  <button type="button" className="outline-none border rounded-md px-16 mr-5 py-2 hover:shadow-lg shadow-sm bg-primary/80 text-white font-semibold" onClick={submitForm}>Submit</button> 
+                    : "" 
+                  : 
+                  <button type="button" className="outline-none border rounded-md px-16 mr-5 py-2 hover:shadow-lg shadow-sm bg-primary/80 text-white font-semibold" onClick={()=> {setCurrentPage(page => page = page+1)}}>Next</button>
+            }
+          </div>
+        
+        {/* <div className="w-full flex items-center">
           <Step1Form step1Data={step1Data} />
-        </div>
+        </div> */}
       </div>
     </div>
   )
@@ -131,7 +191,6 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
 
   const navigate = useNavigate();
   const { updateStep1 } = useContext(Context)
-
   const onSubmit = async (data: any) => {
     // console.log(data);
     try{
@@ -162,7 +221,7 @@ const Step1Form = ({ step1Data }: { step1Data: Step1Data }) => {
     if (key) {
       return;
     }
-    if ((value.length === 4 || value.length === 8 || value.length === 11)) {
+    if ((value.length === 4 || value.length === 8 || value.length === 12)) {
       value = value + "-";
     }
     setValue("healthcard", value);

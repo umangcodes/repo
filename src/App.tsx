@@ -7,7 +7,7 @@ import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
 import Step3 from './pages/Step3';
 import Location from "./pages/Location"
-
+import Stepa1 from './pages/steps/Stepa1';
 function App() {
   const [loading, setLoading] = useState(false);
   return (
@@ -22,6 +22,13 @@ function App() {
             <Step1 />
           </Layout>
         } />
+
+        <Route path='/step1' element={
+          <Layout>
+            <Stepa1 />
+          </Layout>
+        } />
+
         <Route path='/fill-address' element={
           <Layout>
             <Step2 />

@@ -65,9 +65,9 @@ function Stepa1() {
     if (newContextValue.step1) {
       setStep2Data(newContextValue.step1);
     }
+    onLoad()
     checkOverallValidation()
     // check for validation
-    validate()
   }, [newContextValue]);
 
   useEffect(() => {

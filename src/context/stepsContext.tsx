@@ -99,6 +99,10 @@ export const StepContext = createContext({
   resetValues: () => { }
 });
 
+function sanitize(string:string) {
+  const reg = /[/|&<>"'=-]/ig;
+  return string.replace(reg, (match) => "");
+}
 
 const StepsProvider = ({ children }: { children: JSX.Element }) => {
   const [newContextValue, setNewContextValue] = useState(defaultValue)
@@ -108,7 +112,7 @@ const StepsProvider = ({ children }: { children: JSX.Element }) => {
     console.log(data)
     setNewContextValue({
       ...newContextValue,
-      step1: {...newContextValue.step1, ...data}
+      step1: {...newContextValue.step1, ...data, healthcard: sanitize(data.healthcard).slice(0,10)}
     })
   }
 

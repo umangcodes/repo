@@ -86,12 +86,11 @@ function Stepa1() {
       setStep1Data(newContextValue.step1);
     }
     checkOverallValidation()
-    console.log(errors)
-  }, [newContextValue]);
+  }, [errors, newContextValue]);
 
   useEffect(() => {
     updatePages({step1: stageValidationPass})
-  },[stageValidationPass])
+  },[errors, stageValidationPass])
   return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
       <div>

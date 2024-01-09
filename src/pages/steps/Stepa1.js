@@ -71,7 +71,7 @@ function Stepa1() {
                     firstname : newContextValue.step1.firstname, 
                     lastname: newContextValue.step1.lastname, 
                     middlename: newContextValue.step1.middlename, 
-                    healthcard: newContextValue.step1.healthcard 
+                    healthcard: sanitize(newContextValue.step1.healthcard).slice(0,10) 
                   })
     setErrors(val => ({
       ...val,

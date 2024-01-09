@@ -66,6 +66,21 @@ function Stepa1() {
     }
   };
 
+  const onLoad = () =>{
+    setStep1Data({firstname : newContextValue.step1.firstname, lastname: newContextValue.step1.lastname, middlename: newContextValue.step1.middlename, healthcard: newContextValue.step1.healthcard })
+    setErrors({
+      ...errors,
+      firstname: validate("firstname", newContextValue.step1.firstname),
+      lastname: validate("lastname", newContextValue.step1.lastname),
+      healthcard: validate("healthcard", newContextValue.step1.healthcard),
+
+    })
+  }
+
+  useEffect(() => {
+    onLoad()
+  },[])
+
   useEffect(() => {
     if (newContextValue.step1) {
       setStep1Data(newContextValue.step1);
@@ -129,7 +144,7 @@ function Stepa1() {
         {errors.healthcard && <p className="text-red-500">{errors.healthcard}</p>}
 
 
-        { newContextValue.pages.step1 ? "" : <p className="transition-all ease-in-out duration-150 text-center pt-5 font-semibold text-red-500">Check for errors</p>}
+        {/* { newContextValue.pages.step1 ? "" : <p className="transition-all ease-in-out duration-150 text-center pt-5 font-semibold text-red-500">Check for errors</p>} */}
       </div>
       </motion.div>
   )

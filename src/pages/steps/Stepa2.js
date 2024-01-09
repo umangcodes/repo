@@ -53,18 +53,28 @@ function Stepa1() {
       });
       updateNewStep1({ [name]: value });
   }
+  const onLoad = () =>{
+    setStep2Data({dob : newContextValue.step1.dob, issueDate: newContextValue.step1.issueDate, expiryDate: newContextValue.step1.expiryDate})
+    setErrors({
+      ...errors,
+      dob: validate("dob", newContextValue.step1.dob)
+    })
+  }
 
   useEffect(() => {
     if (newContextValue.step1) {
       setStep2Data(newContextValue.step1);
     }
     checkOverallValidation()
-    console.log(errors)
+    // check for validation
+    validate()
   }, [newContextValue]);
 
   useEffect(() => {
     updatePages({step2: stageValidationPass})
   },[stageValidationPass])
+
+  useEffect(() => {onLoad()}, [])
 
   function sanitize(string) {
     const reg = /[/|&<>"'=-]/ig;
@@ -74,7 +84,7 @@ function Stepa1() {
   const displayDate = (dateString) =>{
     sanitize(dateString)
     if(dateString.length == 8){
-      return `${step2Data.dob.slice(0,4)}/${step2Data.dob.slice(4,6)}/${step2Data.dob.slice(6,8)}`
+      return `${dateString.slice(0,4)}/${dateString.slice(4,6)}/${dateString.slice(6,8)}`
     }else{
       return sanitize(dateString)
     }

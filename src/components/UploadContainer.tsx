@@ -554,10 +554,10 @@ const UploadContainer = ({ step1Data, setStep1Data }: any) => {
       signature: "",
       healthCardImage: result["healthCardImage"],
     }
-    data.healthcard = data.healthcard.toString().slice(0, 4) + "-" + data.healthcard.toString().slice(4, 7) + "-" + data.healthcard.toString().slice(7, 10) + "-" + data.healthcard.toString().slice(10,);
-    data.issueDate = data.issueDate.toString().slice(0, 4) + "-" + data.issueDate.toString().slice(4, 6) + "-" + data.issueDate.toString().slice(6,)
-    data.expiryDate = data.expiryDate.toString().slice(0, 4) + "-" + data.expiryDate.toString().slice(4, 6) + "-" + data.expiryDate.toString().slice(6,)
-    data.dob = data.dob.toString().slice(0, 4) + "-" + data.dob.toString().slice(4, 6) + "-" + data.dob.toString().slice(6,)
+    data.healthcard = data.healthcard.toString().slice(0,10)
+    data.issueDate = data.issueDate.toString()
+    data.expiryDate = data.expiryDate.toString()
+    data.dob = data.dob.toString()
     console.log(data)
     updateStep1({...data, vc:""})
     const tranformDataStep1 = (data:any) => {

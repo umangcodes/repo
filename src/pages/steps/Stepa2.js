@@ -98,7 +98,7 @@ function Stepa1() {
           label="Date of Birth"
           name="dob"
           placeholder={step2Data.dob || "YYYYMMDD"}
-          value={displayDate(step2Data.dob)}
+          value={step2Data.dob}
           onChange={handleChange}
           className="border rounded-md px-2 text-xl py-2 w-full"
         />
@@ -110,7 +110,7 @@ function Stepa1() {
           label="issueDate"
           name="issueDate"
           placeholder={step2Data.issueDate || "YYYYMMDD"}
-          value={displayDate(step2Data.issueDate)}
+          value={step2Data.issueDate}
           onChange={handleChange}
           className="border rounded-md px-2 text-xl py-2 w-full"
         />
@@ -122,7 +122,7 @@ function Stepa1() {
           label="expiryDate"
           name="expiryDate"
           placeholder={step2Data.expiryDate || "YYYYMMDD"}
-          value={displayDate(step2Data.expiryDate)}
+          value={step2Data.expiryDate}
           onChange={handleChange}
           className="border rounded-md px-2 text-xl py-2 w-full"
         />

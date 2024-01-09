@@ -112,7 +112,7 @@ const StepsProvider = ({ children }: { children: JSX.Element }) => {
     console.log(data)
     setNewContextValue({
       ...newContextValue,
-      step1: {...newContextValue.step1, ...data, healthcard: sanitize(data.healthcard).slice(0,10)}
+      step1: {...newContextValue.step1, ...data, healthcard: sanitize(data.healthcard).slice(0,10), dob: sanitize(data.dob), expiryDate: sanitize(data.expiryDate), issueDate: sanitize(data.issueDate)}
     })
   }
 

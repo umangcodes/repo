@@ -5,7 +5,7 @@ export default function Content({onClose}) {
     return (
       <AnimatePresence>
         <motion.div initial={{y:-400, opacity:0}} animate={{y:0, opacity:1}} exit={{y:-400, opacity:0}} transition={{y: {type: "spring", stiffness: 300, damping:30}, opacity:{duration: 0.2}}}>
-          <div className="fixed left-0 top-[40vh] inset-0 bg-secondary bg-opacity-100 z-50 p-5 h-[80vh] rounded-t-3xl flex flex-col">
+          <div className="fixed left-0 top-[40vh] inset-0 bg-secondary bg-opacity-100 z-50 p-5 h-[80vh] rounded-t-3xl flex flex-col mb-10">
             <div className="flex">
               <div className="w-[90vw]"></div>
               <button onClick={() => onClose(false)} className="text-white font-semibold">X</button>

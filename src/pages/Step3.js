@@ -1,6 +1,6 @@
 import Carousel from "../components/carousel/Carousel";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { LOADER_PRIMARY } from "../assets";
 const Step3 = () => {
@@ -13,19 +13,28 @@ const Step3 = () => {
     const location = localStorage.getItem("location")
     const healthcard = localStorage.getItem("healthcard")
     const getData = async() => {
-      // console.log({healthcard: healthcard, location: location})
-      console.log(data.data.waitingInQueue || 1)
-      await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log("error"))
+      console.log({healthcard: healthcard, location: location})
+      console.log(data ? data.data.waitingInQueue : 1)
+      await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log(error))
     }
 
-    useEffect(() =>{
-      let interval = setInterval(() => {
-          getData()
-      }, 2000);
-      return () => {
-        clearInterval(interval)
+    const finalCallRef = useRef(finalCall);
+  finalCallRef.current = finalCall;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!finalCallRef.current) {
+        getData();
+
+        // Check the updated condition with the current state of data
+        if (data && data.data.waitingInQueue <= 0) {
+          setFinalCall(true);
+        }
       }
-    },[])
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [data]);
 
     
 

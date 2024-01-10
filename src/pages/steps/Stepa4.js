@@ -44,6 +44,15 @@ function Stepa4() {
       updateNewStep4({ [name]: value });
   }
 
+  const onLoad = () =>{
+    setStep4Data({phone : newContextValue.step4.phone, email: newContextValue.step4.email})
+    setErrors({
+      ...errors,
+      phone: validate("phone", newContextValue.step4.phone),
+      email: validate("email", newContextValue.step4.email)
+    })
+  }
+
   const { newContextValue, updateNewStep4, updatePages } = useContext(StepContext)
   
   const checkOverallValidation = () => {
@@ -58,6 +67,7 @@ function Stepa4() {
     if (newContextValue.step1) {
       setStep4Data(newContextValue.step4);
     }
+    onLoad()
     checkOverallValidation()
     console.log(errors)
   }, [newContextValue]);
@@ -65,6 +75,8 @@ function Stepa4() {
   useEffect(() => {
     updatePages({step4: stageValidationPass})
   },[stageValidationPass])
+
+  useEffect(() => {onLoad()}, [])
 
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>

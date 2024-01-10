@@ -15,7 +15,7 @@ const Step3 = () => {
     const getData = async() => {
       console.log({healthcard: healthcard, location: location})
       console.log(data.data.waitingInQueue || 1)
-      await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log(error))
+      await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log("error"))
     }
 
     useEffect(() =>{

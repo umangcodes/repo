@@ -20,8 +20,6 @@ function Stepa3() {
     country: ""
   })
   const updateAddress = (resp) => {
-    console.log(resp)
-    console.log(addressInput)
     if(resp.address_components){
       resp.address_components.map((address_array_ele) => {
         if(address_array_ele.types.includes("administrative_area_level_3")){
@@ -57,10 +55,6 @@ function Stepa3() {
       postalCode: postalCode
     })
   },[postalCode])
-
-  useEffect(()=>{
-    console.log(addressInput)
-  },[addressInput])
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
       <div id="address-field" className="flex flex-col">

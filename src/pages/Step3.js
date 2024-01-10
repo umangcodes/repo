@@ -25,6 +25,11 @@ const Step3 = () => {
         clearInterval(interval)
       }
     },[])
+
+    useEffect(() =>{
+        getData()
+    },[])
+
     return (
     <div>
       <div className="border w-full flex items-center justify-center bg-[#138bea] text-xl text-center text-white rounded-b-xl">{data ? data.data.address : ""}</div>

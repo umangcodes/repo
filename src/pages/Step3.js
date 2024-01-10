@@ -20,7 +20,7 @@ const Step3 = () => {
         if(data.data.waitingInQueue !== 0){
           getData()
         }
-      }, 5000);
+      }, 15000);
       return () => {
         clearInterval(interval)
       }

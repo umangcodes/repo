@@ -64,7 +64,7 @@ function Stepa3() {
           <AutoComplete apiKey={process.env.REACT_APP_GOOGLE_API_KEY} style={{ width: "100%" }} options={{
           types: ['address'],
           componentRestrictions: { country: "ca" },
-        }} onPlaceSelected={(place) => {setAddressInput(place)}} placeholder="Enter your address here" className="border rounded-md px-2 text-xl py-2 w-full"/>
+        }} onPlaceSelected={(place) => {setAddressInput(place)}} placeholder="Enter your address here"/>
       </div>
       <p className="text-xl font-semibold">Street</p>
       <input

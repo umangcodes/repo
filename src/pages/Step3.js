@@ -14,7 +14,7 @@ const Step3 = () => {
     const healthcard = localStorage.getItem("healthcard")
     const getData = async() => {
       console.log({healthcard: healthcard, location: location})
-      console.log(data.data.waitingInQueue)
+      console.log(data.data.waitingInQueue || 1)
       await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log(error))
     }
 

@@ -31,7 +31,7 @@ const Step3 = () => {
           setFinalCall(true);
         }
       }
-    }, 3000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, [data]);

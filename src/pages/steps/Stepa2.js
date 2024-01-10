@@ -18,9 +18,6 @@ function Stepa1() {
     switch (name) {
       case "issueDate":
       case "expiryDate":
-        if(!parseInt(value)){
-          return "Must be a date"
-        }
         if (!/^(?:\d{8}|)$/.test(value)) {
           return "Must be in YYYYMMDD format";
         }

@@ -5,7 +5,7 @@ import axios from "axios";
 import { LOADER_PRIMARY } from "../assets";
 const Step3 = () => {
   const [data, setData] = useState(0)
-  const [firstcall, setFirstCall] = useState(true)
+  const [finalCall, setFinalCall] = useState(false)
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -18,12 +18,11 @@ const Step3 = () => {
     }
 
     useEffect(() =>{
-      if(firstcall){
-        getData()
-        setFirstCall(false)
+      if(data && data.data.waitingInQueue <= 0 ){
+        setFinalCall(true)
       }
       let interval = setInterval(() => {
-        if(data.data.waitingInQueue > 0){
+        if(!finalCall){
           getData()
         }
       }, 2000);

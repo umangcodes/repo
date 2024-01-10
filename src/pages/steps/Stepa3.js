@@ -65,7 +65,7 @@ function Stepa3() {
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
       <div id="address-field" className="flex flex-col">
           <label className="text-xl font-semibold">Address*</label>
-          <AutoComplete apiKey={process.env.REACT_APP_GOOGLE_API_KEY} style={{ width: "100%" }} options={{
+          <AutoComplete apiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY} style={{ width: "100%" }} options={{
           types: ['address'],
           componentRestrictions: { country: "ca" },
         }} onPlaceSelected={(place) => {setAddressInput(place)}} placeholder="Enter your address here"/>

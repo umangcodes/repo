@@ -58,11 +58,11 @@ function Stepa3() {
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 0.5}}>
       <div id="address-field" className="flex flex-col">
-          <label className="text-xl font-semibold">Address*</label>
+          <label className="text-xl font-semibold">Address*<span className="text-sm italic">Start typing and then select.</span></label>
           <AutoComplete apiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY} style={{ width: "100%" }} options={{
           types: ['address'],
           componentRestrictions: { country: "ca" },
-        }} onPlaceSelected={(place) => {setAddressInput(place)}} placeholder="Enter your address here" className="border rounded-md px-2 text-xl py-2 w-full"/>
+        }} onPlaceSelected={(place) => {setAddressInput(place)}} placeholder="Start typing and then select." className="border rounded-md px-2 text-xl py-2 w-full"/>
       </div>
       <p className="text-xl font-semibold">Street</p>
       <input

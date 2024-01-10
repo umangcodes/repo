@@ -19,14 +19,8 @@ const Step3 = () => {
     }
 
     useEffect(() =>{
-      
       let interval = setInterval(() => {
-        if(!finalCall){
           getData()
-          if(data.data.waitingInQueue === 0 ){
-            setFinalCall(true)
-          }
-        }
       }, 2000);
       return () => {
         clearInterval(interval)

@@ -23,7 +23,7 @@ const Step3 = () => {
       let interval = setInterval(() => {
         if(!finalCall){
           getData()
-          if(data && data.data.waitingInQueue <= 0 ){
+          if(data.data.waitingInQueue === 0 ){
             setFinalCall(true)
           }
         }

@@ -16,7 +16,12 @@ const Step3 = () => {
       await axios.post("https://us-central1-patient-registration-portal.cloudfunctions.net/web/waittime", {healthcard: healthcard, location: location}).then(resp => {setData(resp); console.log(resp)}, error => console.log(error))
     }
     useEffect(() =>{
-      getData()
+      let interval = setInterval(() => {
+        getData()
+      }, 5000);
+      return () => {
+        clearInterval(interval)
+      }
     },[])
     return (
     <div>

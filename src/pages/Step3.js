@@ -19,12 +19,13 @@ const Step3 = () => {
     }
 
     useEffect(() =>{
-      if(data && data.data.waitingInQueue <= 0 ){
-        setFinalCall(true)
-      }
+      
       let interval = setInterval(() => {
         if(!finalCall){
           getData()
+          if(data && data.data.waitingInQueue <= 0 ){
+            setFinalCall(true)
+          }
         }
       }, 2000);
       return () => {

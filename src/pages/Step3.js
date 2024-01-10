@@ -23,7 +23,7 @@ const Step3 = () => {
         setFirstCall(false)
       }
       let interval = setInterval(() => {
-        if(data.data.waitingInQueue !== 0){
+        if(data.data.waitingInQueue > 0){
           getData()
         }
       }, 2000);

@@ -40,8 +40,8 @@ function Stepa1() {
 
   const checkOverallValidation = () => {
     const hasErrors = Object.values(errors).some(error => error);
-    console.log(errors)
-    console.log("errors on this page: " + hasErrors)
+    // console.log(errors)
+    // console.log("errors on this page: " + hasErrors)
     setStageValidationPass(!hasErrors);
   };
   const handleChange = (e) => {

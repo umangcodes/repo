@@ -31,7 +31,10 @@ const Step3 = () => {
           setFinalCall(true);
         }
       }
-    }, 60000);
+    }, 15000);
+    //  avg. api calls per month per user cal: 60 * 60 * 10 (avg hours) * 365 / 15(api call freq) / 12(months) = 73000 continious calls. our free limit 2M
+    //  so ~27 users can simultaniously use this system for free
+    //  increase the time to 20 sec api call interval for increase free limit to ~36.6 users.
 
     return () => clearInterval(interval);
   }, [data]);
@@ -67,7 +70,10 @@ const Step3 = () => {
                       </div>
                       <h2 className="text-xl font-bold text-secondary pt-2">Please check with the reception</h2>
                     </div>
-                  : <img src={LOADER_PRIMARY} alt="Loading" className="h-24"/>
+                  : <div>
+                    <img src={LOADER_PRIMARY} alt="Loading" className="h-24"/>
+                    <p>You are added to the queue. Please wait while we check for patients ahead of you.</p>
+                    </div>
                 }
               </div>
             </div>
